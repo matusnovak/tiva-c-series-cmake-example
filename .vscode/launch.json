@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/example.axf",
+            "targetArchitecture": "ARM",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "MIMode": "gdb",
+            "miDebuggerServerAddress": "localhost:3333",
+            "externalConsole": false,
+            "miDebuggerPath": "C:\\ProgramData\\chocolatey\\lib\\gcc-arm-embedded\\tools\\bin\\arm-none-eabi-gdb.exe"
+        }
+    ]
+}
