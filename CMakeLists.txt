@@ -30,7 +30,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${TIVA_WARE_C_PATH})
 target_compile_options(${PROJECT_NAME} PRIVATE 
   -mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 
   -mfloat-abi=hard -ffunction-sections -fdata-sections
-  -Wall -pedantic -MD
+  -Wall -pedantic -MD -fno-exceptions -fno-rtti
 )
 
 # Platform specific definitions
@@ -43,7 +43,9 @@ get_target_property(COMPILE_FLAGS ${PROJECT_NAME} COMPILE_OPTIONS)
 execute_process(COMMAND ${CMAKE_C_COMPILER} ${COMPILE_FLAGS} -print-libgcc-file-name OUTPUT_VARIABLE LIBGCC_PATH)
 execute_process(COMMAND ${CMAKE_C_COMPILER} ${COMPILE_FLAGS} -print-file-name=libc.a OUTPUT_VARIABLE LIBC_PATH)
 execute_process(COMMAND ${CMAKE_C_COMPILER} ${COMPILE_FLAGS} -print-file-name=libm.a OUTPUT_VARIABLE LIBM_PATH)
+execute_process(COMMAND ${CMAKE_C_COMPILER} ${COMPILE_FLAGS} -print-file-name=libstdc++.a OUTPUT_VARIABLE LIBSTDCPP_PATH)
 string(STRIP "${LIBGCC_PATH}" LIBGCC_PATH)
+string(STRIP "${LIBSTDCPP_PATH}" LIBSTDCPP_PATH)
 string(STRIP "${LIBC_PATH}" LIBC_PATH)
 string(STRIP "${LIBM_PATH}" LIBM_PATH)
 
@@ -54,10 +56,11 @@ target_link_options(${PROJECT_NAME} PRIVATE
 
 # Include other libraries
 target_link_libraries(${PROJECT_NAME} PUBLIC
+  ${TIVA_WARE_C_PATH}/driverlib/gcc/libdriver.a
   ${LIBM_PATH}
   ${LIBC_PATH}
   ${LIBGCC_PATH}
-  ${TIVA_WARE_C_PATH}/driverlib/gcc/libdriver.a
+  ${LIBSTDCPP_PATH}
 )
 
 # Objcopy to create a binary file

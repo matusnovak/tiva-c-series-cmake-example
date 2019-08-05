@@ -37,7 +37,7 @@ cmake -G "MinGW Makefiles" \
   -DCMAKE_MAKE_PROGRAM=make.exe \ # Or mingw32-make.exe
   -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_TOOLCHAIN_FILE:PATH="../cmake/arm-none-eabi-toolchain.cmake" \
-  -DTIVA_WARE_C_PATH=C:\ti\TivaWare_C_Series-2.1.4.178 \
+  -DTIVA_WARE_C_PATH=C:/ti/TivaWare_C_Series-2.1.4.178 \
   ..
 
 # Expected output:
